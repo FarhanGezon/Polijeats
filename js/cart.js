@@ -3,7 +3,7 @@ let cart = [];
 function findMenu(name) { return MENUS.find((m) => m.menu === name); }
 function addToCart(name) {
   const m = findMenu(name);
-  if (!m || m.stock < 1) { alert("Stok habis."); return; }
+  if (!m || m.status !== "buka" || m.stock < 1) { alert("Menu tidak tersedia."); return; }
   m.stock--;
   const f = cart.find((i) => i.name === name);
   if (f) f.qty++;
@@ -39,11 +39,3 @@ function renderCart() {
   badge.textContent = n;
 }
 
-function sendWA() {
-  if (!cart.length) { alert("Keranjang masih kosong."); return; }
-  const nama = document.getElementById("buyerName").value || "-";
-  const jam = document.getElementById("pickupTime").value || "-";
-  const lines = cart.map((i) => `- ${i.name} x${i.qty} = ${fmt(i.price * i.qty)}`);
-  const msg = `Halo! Pesanan Polijeats%0A%0A${lines.join("%0A")}%0A%0ATotal: ${fmt(cartTotal())}%0ANama: ${nama}%0AJam ambil: ${jam}`;
-  window.open("https://wa.me/?text=" + msg, "_blank");
-}
