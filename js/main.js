@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("grid").addEventListener("click", (e) => {
     const b = e.target.closest(".tambah-btn");
     if (!b || b.disabled) return;
-    addToCart(b.dataset.menu, parseInt(b.dataset.harga));
+    addToCart(b.dataset.menu);
   });
 
   document.getElementById("cartBtn").onclick = () => { renderCart(); openModal("cartModal"); };
@@ -31,11 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const penjual = document.getElementById("fPenjual").value.trim();
     const menu = document.getElementById("fMenu").value.trim();
     const harga = parseInt(document.getElementById("fHarga").value) || 0;
+    const stok = parseInt(document.getElementById("fStok").value) || 0;
     const c = document.getElementById("fCat").value;
-    if (!toko || !penjual || !menu || !harga) { alert("Lengkapi semua field + harga."); return; }
-    MENUS.unshift({ toko, penjual, jam: "08.00–17.00", menu, harga, cat: c, status: "buka" });
+    if (!toko || !penjual || !menu || !harga || stok < 15) { alert("Lengkapi semua field, harga & stok min 15."); return; }
+    MENUS.unshift({ toko, penjual, jam: "08.00–17.00", menu, harga, cat: c, status: "buka", stock: stok });
     renderGrid();
-    ["fToko", "fPenjual", "fWA", "fMenu", "fHarga"].forEach((id) => (document.getElementById(id).value = ""));
+    ["fToko", "fPenjual", "fWA", "fMenu", "fHarga", "fStok"].forEach((id) => (document.getElementById(id).value = ""));
     closeModal("menuModal");
   };
 });

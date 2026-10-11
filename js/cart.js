@@ -1,17 +1,28 @@
 let cart = [];
 
-function addToCart(name, price) {
+function findMenu(name) { return MENUS.find((m) => m.menu === name); }
+function addToCart(name) {
+  const m = findMenu(name);
+  if (!m || m.stock < 1) { alert("Stok habis."); return; }
+  m.stock--;
   const f = cart.find((i) => i.name === name);
   if (f) f.qty++;
-  else cart.push({ name, price, qty: 1 });
-  renderCart();
+  else cart.push({ name, price: m.harga, qty: 1 });
+  renderGrid(); renderCart();
   openModal("cartModal");
 }
 
 function chg(ix, d) {
-  cart[ix].qty += d;
-  if (cart[ix].qty < 1) cart.splice(ix, 1);
-  renderCart();
+  const it = cart[ix]; const m = findMenu(it.name);
+  if (d > 0) {
+    if (!m || m.stock < 1) { alert("Stok habis."); return; }
+    m.stock--; it.qty++;
+  } else {
+    if (m) m.stock++;
+    it.qty--;
+    if (it.qty < 1) cart.splice(ix, 1);
+  }
+  renderGrid(); renderCart();
 }
 
 function cartTotal() { return cart.reduce((t, i) => t + i.price * i.qty, 0); }
