@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Polijeats</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+<header class="bg-white shadow-sm">
+<div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-[#08afe6] text-white font-bold rounded-lg flex items-center justify-center text-lg">PE</div>
+<h1 class="text-xl font-bold text-gray-800">Polijeats <span class="text-sm font-normal text-gray-500">Admin</span></h1>
+</div>
+<div class="flex items-center gap-2">
+<a href="index.html" class="text-xs border rounded-lg px-3 py-1.5">Lihat Katalog</a>
+<button id="logoutBtn" class="hidden text-xs border rounded-lg px-3 py-1.5">Keluar</button>
+</div>
+</div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 py-8">
+<!-- Login -->
+<div id="loginBox" class="bg-white rounded-xl shadow max-w-xs mx-auto p-5">
+<h3 class="font-bold text-lg mb-4">Login Admin</h3>
+<div class="space-y-2">
+<input id="adminUser" type="text" placeholder="Username..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<input id="adminPass" type="password" placeholder="Password..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+</div>
+<p id="loginErr" class="hidden text-xs text-red-500 mt-1">Username / password salah.</p>
+<button id="loginBtn" class="mt-3 w-full bg-[#08afe6] hover:bg-[#0793c2] text-white text-sm font-semibold py-2.5 rounded-lg">Masuk</button>
+</div>
+
+<!-- Panel -->
+<div id="panelBox" class="hidden bg-white rounded-xl shadow p-5">
+<h3 class="font-bold text-lg">Kelola Menu</h3>
+<p id="adminCount" class="text-xs text-gray-500 mb-3"></p>
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead><tr class="text-left text-xs text-gray-500 border-b">
+<th class="py-2">Menu</th><th>Harga</th><th>Stok</th><th>Status</th><th class="text-right">Aksi</th>
+</tr></thead>
+<tbody id="adminRows"></tbody>
+</table>
+</div>
+<h4 class="font-bold mt-5 mb-2 text-sm">Tambah Menu Baru</h4>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+<input id="aToko" type="text" placeholder="Nama Toko..." class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<input id="aPenjual" type="text" placeholder="Nama Penjual..." class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<input id="aMenu" type="text" placeholder="Nama Menu..." class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<input id="aHarga" type="number" min="0" placeholder="Harga (Rp)..." class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<input id="aStok" type="number" min="0" placeholder="Stok..." class="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#08afe6]">
+<select id="aCat" class="border rounded-lg px-3 py-2 text-sm">
+<option value="makanan">Makanan</option>
+<option value="snack">Snack</option>
+<option value="minuman">Minuman</option>
+</select>
+</div>
+<button id="adminAddBtn" class="mt-3 w-full bg-[#08afe6] hover:bg-[#0793c2] text-white text-sm font-semibold py-2.5 rounded-lg">Tambah Menu</button>
+</div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

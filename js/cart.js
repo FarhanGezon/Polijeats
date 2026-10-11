@@ -8,7 +8,7 @@ function addToCart(name) {
   const f = cart.find((i) => i.name === name);
   if (f) f.qty++;
   else cart.push({ name, price: m.harga, qty: 1 });
-  renderGrid(); renderCart();
+  saveMenus(); renderGrid(); renderCart();
   openModal("cartModal");
 }
 
@@ -22,7 +22,7 @@ function chg(ix, d) {
     it.qty--;
     if (it.qty < 1) cart.splice(ix, 1);
   }
-  renderGrid(); renderCart();
+  saveMenus(); renderGrid(); renderCart();
 }
 
 function cartTotal() { return cart.reduce((t, i) => t + i.price * i.qty, 0); }

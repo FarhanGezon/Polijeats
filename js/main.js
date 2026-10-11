@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const c = document.getElementById("fCat").value;
     if (!toko || !penjual || !menu || !harga || stok < 15) { alert("Lengkapi semua field, harga & stok min 15."); return; }
     MENUS.unshift({ toko, penjual, jam: "08.00–17.00", menu, harga, cat: c, status: "buka", stock: stok });
-    renderGrid();
+    saveMenus(); renderGrid();
     ["fToko", "fPenjual", "fWA", "fMenu", "fHarga", "fStok"].forEach((id) => (document.getElementById(id).value = ""));
     closeModal("menuModal");
   };
