@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polijeats - Kantin Online Polije Kampus 2 Bondowoso</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+<!-- Header -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+<div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-orange-500 text-white font-bold rounded-lg flex items-center justify-center text-lg">PE</div>
+<h1 class="text-xl font-bold text-gray-800">Polijeats</h1>
+</div>
+<div class="flex items-center gap-3">
+<button id="addMenuBtn" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-lg">+ Tambah Menu</button>
+<button id="cartBtn" class="relative p-2 text-gray-700 hover:text-orange-500" aria-label="Keranjang belanja">
+<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.6a1 1 0 00.9 1.4H19M9 22a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+<span id="cartCount" class="flex absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold w-5 h-5 rounded-full items-center justify-center">0</span>
+</button>
+</div>
+</div>
+</header>
+
+<!-- Hero Banner -->
+<section class="bg-orange-500 text-white">
+<div class="max-w-6xl mx-auto px-4 py-12">
+<h2 class="text-3xl font-bold mb-2">Platform Kantin Online Polije Kampus 2</h2>
+<p class="text-orange-100">Pesan makanan &amp; minuman langsung via WhatsApp tanpa antre.</p>
+</div>
+</section>
+<!-- Katalog Produk -->
+<main class="max-w-6xl mx-auto px-4 py-8">
+<!-- Search & Filter Bar -->
+<div class="flex flex-col md:flex-row gap-3 mb-4">
+<input id="searchInput" type="text" placeholder="Cari makanan / penjual..." class="flex-1 border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<select id="statusFilter" class="border rounded-lg px-4 py-2 text-sm">
+<option value="semua">Semua Status</option>
+<option value="buka">Buka</option>
+<option value="tutup">Tutup</option>
+</select>
+</div>
+<div id="tabs" class="flex gap-2 mb-6">
+<button data-cat="semua" class="tab-btn bg-white text-sm px-4 py-1.5 rounded-full border">Semua</button>
+<button data-cat="makanan" class="tab-btn bg-white text-sm px-4 py-1.5 rounded-full border">Makanan</button>
+<button data-cat="snack" class="tab-btn bg-white text-sm px-4 py-1.5 rounded-full border">Snack</button>
+<button data-cat="minuman" class="tab-btn bg-white text-sm px-4 py-1.5 rounded-full border">Minuman</button>
+</div>
+
+<!-- Grid Kartu Produk -->
+<div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+</div>
+</main>
+
+<footer class="border-t bg-white">
+<div class="max-w-6xl mx-auto px-4 py-4 text-center text-sm text-gray-500">Polijeats - Kantin Online Polije Kampus 2 Bondowoso</div>
+</footer>
+
+<!-- Modal Keranjang Pesanan -->
+<div id="cartModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+<div class="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-lg">Keranjang Pesanan</h3>
+<button id="closeModal" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
+</div>
+<div id="cartItems" class="space-y-3"></div>
+<p id="emptyMsg" class="text-sm text-gray-500 text-center py-4">Keranjang kosong.</p>
+<div class="mt-4 space-y-2">
+<input id="buyerName" type="text" placeholder="Nama pemesan..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<input id="pickupTime" type="time" class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+</div>
+<div class="flex justify-between font-bold mt-4">
+<span>Total</span><span id="cartTotal">Rp0</span>
+</div>
+<button id="waBtn" class="mt-3 w-full bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2.5 rounded-lg">Kirim Pesanan via WhatsApp</button>
+</div>
+</div>
+
+<!-- Modal Tambah Menu Mitra -->
+<div id="menuModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+<div class="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-lg">Tambah Menu Mitra</h3>
+<button id="closeMenuModal" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
+</div>
+<div class="space-y-2">
+<input id="fToko" type="text" placeholder="Nama Toko..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<input id="fPenjual" type="text" placeholder="Nama Penjual..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<input id="fWA" type="text" placeholder="No. WhatsApp (08...)..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<input id="fMenu" type="text" placeholder="Nama Menu..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<input id="fHarga" type="number" min="0" placeholder="Harga (Rp)..." class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+<select id="fCat" class="w-full border rounded-lg px-4 py-2 text-sm">
+<option value="makanan">Makanan</option>
+<option value="snack">Snack</option>
+<option value="minuman">Minuman</option>
+</select>
+</div>
+<button id="saveMenuBtn" class="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold py-2.5 rounded-lg">Simpan Menu ke Katalog</button>
+</div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
